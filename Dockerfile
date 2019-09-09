@@ -1,11 +1,7 @@
-FROM hub.c.163.com/library/nginx
+FROM daocloud.io/library/nginx:1.13.0-alpine
 
-MAINTAINER yinquanwang
+MAINTAINER liwaiqiang
 
-RUN rm /etc/nginx/conf.d/default.conf
+COPY dist/ /static/
+COPY conf.d/ /etc/nginx/conf.d
 
-RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
-
-ADD default.conf /etc/nginx/conf.d/
-
-COPY dist/  /usr/share/nginx/html/

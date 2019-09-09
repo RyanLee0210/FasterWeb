@@ -5,7 +5,7 @@ import {Message} from 'element-ui';
 
 
 
-export const baseUrl = "http://localhost:8000";
+export const baseUrl = "";
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = baseUrl;
 
