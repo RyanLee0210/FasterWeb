@@ -24,18 +24,21 @@
 
                             <el-form-item label="邮件策略" prop="strategy">
                                 <el-radio-group v-model="ruleForm.strategy">
-                                    <el-radio label="始终发送"></el-radio>
-                                    <el-radio label="仅失败发送"></el-radio>
-                                    <el-radio label="从不发送"></el-radio>
+                                    <el-radio label="1">始终发送</el-radio>
+                                    <el-radio label="2">仅失败发送</el-radio>
+                                    <el-radio label="3">从不发送</el-radio>
+                                    <el-radio label="4">成功率低于阈值发送</el-radio>
+                                    
                                 </el-radio-group>
+                                <el-input v-model="ruleForm.threshold" v-if="ruleForm.strategy == 4" placeholder="请输入用例执行成功率0~100，例如：90"></el-input>
                             </el-form-item>
 
-                            <el-form-item label="邮件接收人列表" prop="receiver">
+                            <el-form-item label="收件人" prop="receiver">
                                 <el-input type="textarea" v-model="ruleForm.receiver"
                                           placeholder="多个接收人以;分隔" clearable></el-input>
                             </el-form-item>
 
-                            <el-form-item label="邮件抄送人列表" prop="copy">
+                            <el-form-item label="抄送人" prop="copy">
                                 <el-input type="textarea" v-model="ruleForm.copy"
                                           placeholder="多个抄送人以;分隔" clearable></el-input>
                             </el-form-item>
@@ -214,7 +217,8 @@
                     name: '',
                     switch: true,
                     corntab: '',
-                    strategy: '始终发送',
+                    strategy: '1',
+                    threshold: '100',
                     receiver: '',
                     copy: ''
                 },

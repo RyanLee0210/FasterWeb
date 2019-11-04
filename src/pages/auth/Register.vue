@@ -87,6 +87,8 @@
 
 
 <script>
+    import encrypt from "@/utils/crypto.js";
+    import decrypted from "@/utils/decode.js";
 
     export default {
         name: "Register",
@@ -115,9 +117,9 @@
             },
 
             validatePassword() {
-                const pPattern = /^[a-zA-Z\d_]{6,}$/;
+                const pPattern = /^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)(?![a-zA-z\d]+$)(?![a-zA-z!@#$%^&*]+$)(?![\d!@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]{8,20}$/;
                 if (!pPattern.test(this.registerForm.password)) {
-                    this.passwordInvalid = "密码至少6位数";
+                    this.passwordInvalid = "密码必须为8-20位字符串，且必须包含字母+数字+特殊字符";
                     return false
                 }
                 return true
@@ -154,7 +156,11 @@
             ,
             submitForm(formName) {
                 if (this.validateUser() && this.validatePassword() && this.validateRepwd() && this.validateEmail()) {
-                    this.$api.register(this.registerForm).then(resp => {
+                    // 对注册请求的用户名密码数据进行加密处理
+                    let req = {
+                        requestData:encrypt(JSON.stringify(this.registerForm))
+                    }
+                    this.$api.register(req).then(resp => {
                         this.handleRegisterSuccess(resp)
                     })
                 }

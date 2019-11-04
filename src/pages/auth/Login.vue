@@ -69,6 +69,8 @@
 </template>
 
 <script>
+    import encrypt from "@/utils/crypto.js";
+    import decrypted from "@/utils/decode.js";
 
     export default {
         name: "Login",
@@ -118,7 +120,11 @@
             },
             submitForm() {
                 if (this.validateUserName() && this.validatePassword()) {
-                    this.$api.login(this.loginForm).then(resp => {
+                    // 对登录请求的用户名密码数据进行加密处理
+                    let req = {
+                        requestData:encrypt(JSON.stringify(this.loginForm))
+                    }
+                    this.$api.login(req).then(resp => {
                         this.handleLoginSuccess(resp)
                     })
                 }

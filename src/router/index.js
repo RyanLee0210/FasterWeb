@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/pages/home/Home'
+import NewHome from '@/pages/home/NewHome'
 import Register from '@/pages/auth/Register'
 import Login from '@/pages/auth/Login'
+import ChangePwd from '@/pages/auth/ChangePwd'
 import ProjectList from '@/pages/project/ProjectList'
 import ProjectDetail from '@/pages/project/ProjectDetail'
 import DebugTalk from '@/pages/httprunner/DebugTalk'
@@ -26,18 +28,31 @@ export default new Router({
             meta: {
                 title: '用户注册'
             }
-        }, {
+        }, 
+        {
             path: '/fastrunner/login',
             name: 'Login',
             component: Login,
             meta: {
                 title: '用户登录'
             }
-        }, {
+        }, 
+        {
+            path: '/fastrunner/changepwd',
+            name: 'ChangePwd',
+            component: ChangePwd,
+            meta: {
+                title: '修改密码',
+                requireAuth: true
+            }
+        }, 
+        {
 
             path: '/fastrunner',
             name: 'Index',
             component: Home,
+            menuShow: true,
+            iconCls: 'iconfont icon-home', // 图标样式class
             meta: {
                 title: '首页',
                 requireAuth: true
@@ -47,6 +62,8 @@ export default new Router({
                     name: 'ProjectList',
                     path: 'project_list',
                     component: ProjectList,
+                    menuShow: true,
+                    iconCls: 'iconfont icon-home', // 图标样式class
                     meta: {
                         title: '项目列表',
                         requireAuth: true,
@@ -56,6 +73,8 @@ export default new Router({
                     name: 'ProjectDetail',
                     path: 'project/:id/dashbord',
                     component: ProjectDetail,
+                    menuShow: true,
+                    iconCls: 'iconfont icon-home', // 图标样式class
                     meta: {
                         title: '项目预览',
                         requireAuth: true,
@@ -66,6 +85,8 @@ export default new Router({
                     name: 'DebugTalk',
                     path: 'debugtalk/:id',
                     component: DebugTalk,
+                    menuShow: true,
+                    iconCls: 'iconfont icon-home', // 图标样式class
                     meta: {
                         title: '编辑驱动',
                         requireAuth: true,
@@ -76,6 +97,8 @@ export default new Router({
                     name: 'RecordApi',
                     path: 'api_record/:id',
                     component: RecordApi,
+                    menuShow: true,
+                    iconCls: 'iconfont icon-home', // 图标样式class
                     meta: {
                         title: '接口模板',
                         requireAuth: true
@@ -86,6 +109,8 @@ export default new Router({
                     name: 'AutoTest',
                     path: 'auto_test/:id',
                     component: AutoTest,
+                    menuShow: true,
+                    iconCls: 'iconfont icon-home', // 图标样式class
                     meta: {
                         title: '自动化测试',
                         requireAuth: true
@@ -96,6 +121,8 @@ export default new Router({
                     name: 'RecordConfig',
                     path: 'record_config/:id',
                     component: RecordConfig,
+                    menuShow: true,
+                    iconCls: 'iconfont icon-home', // 图标样式class
                     meta: {
                         title: '配置管理',
                         requireAuth: true
@@ -106,6 +133,8 @@ export default new Router({
                     name: 'GlobalEnv',
                     path: 'global_env/:id',
                     component: GlobalEnv,
+                    menuShow: true,
+                    iconCls: 'iconfont icon-home', // 图标样式class
                     meta: {
                         title: '全局变量',
                         requireAuth: true
@@ -116,6 +145,8 @@ export default new Router({
                     name: 'Reports',
                     path: 'reports/:id',
                     component: ReportList,
+                    menuShow: true,
+                    iconCls: 'iconfont icon-home', // 图标样式class
                     meta: {
                         title: '历史报告',
                         requireAuth: true
@@ -126,6 +157,8 @@ export default new Router({
                     name: 'Task',
                     path: 'tasks/:id',
                     component: Tasks,
+                    menuShow: true,
+                    iconCls: 'iconfont icon-home', // 图标样式class
                     meta: {
                         title: '定时任务',
                         requireAuth: true
@@ -136,14 +169,24 @@ export default new Router({
                     name: 'HostIP',
                     path: 'host_ip/:id',
                     component: HostAddress,
+                    menuShow: true,
+                    iconCls: 'iconfont icon-home', // 图标样式class
                     meta: {
                         title: 'HOST配置',
                         requireAuth: true
                     }
 
-                }
+                },
             ]
         },
+        {
+            path:'*',
+            redirect: '/fastrunner',
+            component: Login,
+            meta: {
+                title: '用户登录'
+            }
+        }
 
     ]
 })

@@ -69,6 +69,8 @@
 </template>
 
 <script>
+    import encrypt from "@/utils/crypto.js";
+    import decrypted from "@/utils/decode.js";
 
     export default {
         name: "Login",

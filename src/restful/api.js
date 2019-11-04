@@ -55,6 +55,10 @@ export const login = params => {
     return axios.post('/api/user/login/', params).then(res => res.data)
 };
 
+export const changepwd = params => {
+    return axios.post('/api/user/changepwd/', params).then(res => res.data)
+};
+
 
 // fastrunner api
 export const addProject = params => {
