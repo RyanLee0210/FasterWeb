@@ -18,12 +18,20 @@ module.exports = {
                     '^/httprunner': ''
                 }
             }*/
+            // 增加本地调试环境，使用node的dev代理功能
+            '/api': {
+                changeOrigin: true,
+                target: 'http://127.0.0.1:8000',
+                pathRewrite: {
+                  '^/api': '/api'
+                }
+              }
         },
 
         // Various Dev Server settings
         host: 'localhost', // can be overwritten by process.variables.HOST
         port: 8080, // can be overwritten by process.variables.PORT, if port is in use, a free one will be determined
-        autoOpenBrowser: true,
+        autoOpenBrowser: false,
         errorOverlay: true,
         notifyOnErrors: true,
         poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
@@ -51,7 +59,7 @@ module.exports = {
         // Paths
         assetsRoot: path.resolve(__dirname, '../dist'),
         assetsSubDirectory: 'static',
-        assetsPublicPath: './',
+        assetsPublicPath: '/',
 
         /**
          * Source Maps

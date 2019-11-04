@@ -97,6 +97,40 @@ export const runDebugtalk = params => {
     return axios.post('/api/fastrunner/debugtalk/', params).then(res => res.data)
 };
 
+//代替debugtalk接口，改为pycode接口
+
+export const addPycode = (data,params) => {
+    return axios({url:'/api/fastrunner/pycode/', method:'POST', data:data, params:params})
+};
+
+export const deletePycode = (url, params) => {
+    return axios.delete('/api/fastrunner/pycode/' + url + '/', params)
+};
+
+export const delAllPycode = (data, params) => {
+    return axios.delete('/api/fastrunner/pycode/-1', {data, params})
+};
+
+export const getPycodeList = params => {
+    return axios.get('/api/fastrunner/pycode/', params)
+};
+
+export const getPycodeListPaginationBypage = params => {
+    return axios.get('/api/fastrunner/pycode/', params)
+};
+
+export const getPycode = (url, params) => {
+    return axios.get('/api/fastrunner/pycode/' + url + '/', params)
+};
+
+export const runPycode = (url, params) => {
+    return axios.get('/api/fastrunner/runpycode/' + url + '/', params)
+};
+
+export const updatePycode = (url, params, data) => {
+    return axios({url:'/api/fastrunner/pycode/' + url + '/', method:'PATCH', params:params,data:data})
+};
+
 export const getTree = (url, params) => {
     return axios.get('/api/fastrunner/tree/' + url + '/', params).then(res => res.data)
 };
