@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/pages/home/Home'
-import NewHome from '@/pages/home/NewHome'
 import Register from '@/pages/auth/Register'
 import Login from '@/pages/auth/Login'
 import ChangePwd from '@/pages/auth/ChangePwd'
