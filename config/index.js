@@ -26,11 +26,11 @@ module.exports = {
                   '^/api': '/api'
                 }
               },
-            '/static': {
+            '/djangostatic': {
                 changeOrigin: true,
                 target: 'http://127.0.0.1:8000',
                 pathRewrite: {
-                  '^/static': '/static'
+                  '^/djangostatic': '/djangostatic'
                 }
               },
         },
