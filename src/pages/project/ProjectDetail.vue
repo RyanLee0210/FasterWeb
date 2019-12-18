@@ -49,18 +49,35 @@
 
           
         </ul>
-
+        <el-row class="chart-container">
+            <el-col :span="24">
+              <div id="task_summary" style="width:100%; height:400px;"></div>
+            </el-col>
+        </el-row>
 
     </div>
 </template>
 
 <script>
+    import echarts from 'echarts'
+    import echarts_common_options from '../../echarts_options/echarts_common_options'
     export default {
         name: "ProjectDetail",
         data() {
             return {
-                projectInfo: {}
+                projectInfo: {},
+                task_summary: null,
+                task_summary_details: {},
             }
+        },
+        mounted: function () {
+            let that = this;
+            that.getProjectDetail();
+            // 增加echarts柱形图的点击事件，点击对应柱形图，打开对应的测试报告
+            that.task_summary.on('click', function (param) {
+                var index = param.name;
+                window.open(that.$api.baseUrl + "/api/fastrunner/reports/" + index + "/")
+            });
         },
         methods: {
             success(resp) {
@@ -78,21 +95,30 @@
             },
 
             getProjectDetail() {
-                const pk = this.$route.params.id;
-                this.$api.getProjectDetail(pk).then(res => {
-                    this.projectInfo = res
-                })
-            }
+                let that = this;
+                const pk = that.$route.params.id;
+                // 初始化echarts图表
+                that.task_summary =echarts.init(document.getElementById('task_summary'));
+                that.task_summary.setOption(echarts_common_options.chartColumAndBar_options);
+                that.$api.getProjectDetail(pk).then(res => {
+                    that.projectInfo = res;
+                    // 加载项目的echarts图表
+                    that.task_summary_details = res.task_summary;
+                    that.task_summary.setOption(that.task_summary_details);
+                });
+
+            },
         },
-        mounted() {
-            this.getProjectDetail();
-        }
+
     }
 </script>
 
 <style scoped>
 
 
+    .chart-container .el-col {
+    padding: 30px 20px;
+    }
     .desc-p {
         padding-top: 10px;
         font-size: 12px;
